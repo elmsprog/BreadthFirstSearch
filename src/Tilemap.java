@@ -2,18 +2,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class Tilemap {
+class Tilemap {
 
-    int width, height;
-    public Tile[][] tiles;
+    private int width, height;
+    Tile[][] tiles;
 
-    public Tilemap(int width, int height) {
+    Tilemap(int width, int height) {
         this.width = width;
         this.height = height;
         tiles = new Tile[width][height];
     }
 
-    public void build() {
+    void build() {
         for(int i = 0; i < width; i++) {
             for(int j = 0; j < height; j++) {
                 if(Math.random() < 0.2) {
@@ -25,19 +25,15 @@ public class Tilemap {
         }
     }
 
-    public boolean walkable(int x, int y) {
+    boolean walkable(int x, int y) {
         if(x >= 0 && y >= 0 && x < width && y < height) {
-            if(!tiles[x][y].walkable) {
-                return false;
-            } else {
-                return true;
-            }
+            return tiles[x][y].walkable;
         } else {
             return false;
         }
     }
 
-    public void setSearched(HashMap<Tile, Tile> tilesSearched) {
+    void setSearched(HashMap<Tile, Tile> tilesSearched) {
         if(tilesSearched != null && !tilesSearched.isEmpty()) {
             for(Tile tile: tilesSearched.keySet()) {
                 tile.searched = true;
@@ -45,7 +41,7 @@ public class Tilemap {
         }
     }
 
-    public void setPath(ArrayList<Tile> path) {
+    void setPath(ArrayList<Tile> path) {
         if(path != null && path.size() > 0) {
             for (Tile tile : path) {
                 tile.pathNode = true;
@@ -53,7 +49,7 @@ public class Tilemap {
         }
     }
 
-    public void drawMap() {
+    void drawMap() {
         for(int i = 0; i < width; i++) {
             System.out.println();
             for(int j = 0; j < height; j++) {

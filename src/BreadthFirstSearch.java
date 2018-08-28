@@ -1,16 +1,19 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class BreadthFirstSearch {
 
-    Tilemap tilemap;
-    int startX, startY, endX, endY;
+    private Tilemap tilemap;
+    private int startX, startY, endX, endY;
 
-    Queue<Tile> frontier;
-    public HashMap<Tile, Tile> explored;
+    private Queue<Tile> frontier;
+    HashMap<Tile, Tile> explored;
 
-    Tile current;
+    private Tile current;
 
-    public ArrayList<Tile> path;
+    ArrayList<Tile> path;
 
     public BreadthFirstSearch(Tilemap tilemap, int startX, int startY, int endX, int endY) {
         this.tilemap = tilemap;
@@ -28,7 +31,7 @@ public class BreadthFirstSearch {
 
     }
 
-    public void search() {
+    void search() {
 
         System.out.println("Searching for path");
 
@@ -49,7 +52,7 @@ public class BreadthFirstSearch {
 
     }
 
-    public ArrayList<Tile> getNeighbors(Tile node) {
+    private ArrayList<Tile> getNeighbors(Tile node) {
         ArrayList<Tile> neighbors = new ArrayList<>();
         int x = node.x;
         int y = node.y;
@@ -81,7 +84,7 @@ public class BreadthFirstSearch {
         return neighbors;
     }
 
-    public void createPath() {
+    private void createPath() {
         System.out.println("Building path");
         current = explored.get(tilemap.tiles[endX][endY]);
         while(current != tilemap.tiles[startX][startY]) {
